@@ -10,7 +10,7 @@ const RauxaDefinitionSection = () => {
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
       aria-label="Catalan Flag (Senyera)"
-      className="object-contain"
+      className="object-cover w-full h-full" // Changed from object-contain to ensure it fills the rounded div
     >
       <title>Catalan Flag (Senyera)</title>
       {/* Yellow background */}
@@ -27,23 +27,23 @@ const RauxaDefinitionSection = () => {
     <section className="py-16 md:py-24 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center mb-10">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start mb-10">
             {/* Column 1: Rauxa and Pronunciation */}
-            <div className="md:w-1/3 flex flex-col items-start md:items-end text-left md:text-right">
+            <div className="md:w-1/3 flex flex-col items-start text-left">
               <h2 
                 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-primary-foreground mb-2"
               >
                 Rauxa
               </h2>
               <p 
-                className="text-lg sm:text-xl text-primary-foreground" // Changed from text-muted-foreground
+                className="text-lg sm:text-xl text-primary-foreground"
               >
                 (Catalan: <span className="italic">/ˈraw.ʃə/</span>)
               </p>
             </div>
 
             {/* Divider: Catalan Flag (visible on md screens and up) */}
-            <div className="hidden md:flex items-center justify-center">
+            <div className="hidden md:flex items-center justify-center h-[150px] w-[24px] overflow-hidden rounded-lg">
               {catalanFlagSVG}
             </div>
 
@@ -51,7 +51,7 @@ const RauxaDefinitionSection = () => {
             <div className="md:w-2/3">
               <div className="p-6 border border-border rounded-lg shadow-md bg-card h-full flex items-center">
                 <p 
-                  className="text-xl sm:text-2xl text-card-foreground leading-relaxed"
+                  className="text-xl sm:text-2xl text-card-foreground leading-relaxed text-left"
                 >
                   A sudden, <strong className="font-semibold text-secondary">impetuous outburst</strong>. 
                   That vital spark of <strong className="font-semibold text-accent">creative recklessness</strong> or delightful <strong className="font-semibold text-primary">irrationality</strong> that propels you into unforgettable action.
@@ -61,7 +61,7 @@ const RauxaDefinitionSection = () => {
           </div>
           
           <p 
-            className="text-md sm:text-lg text-muted-foreground leading-relaxed text-center"
+            className="text-md sm:text-lg text-muted-foreground leading-relaxed text-left"
           >
             At Rauxa, we embrace this spirit of unbridled spontaneity. Our app is your catalyst to break free from the everyday, to seize the moment, and to forge genuine connections through shared, impulsive experiences.
           </p>
@@ -72,3 +72,4 @@ const RauxaDefinitionSection = () => {
 };
 
 export default RauxaDefinitionSection;
+
