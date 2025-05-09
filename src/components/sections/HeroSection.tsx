@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from '@/components/ui/button';
@@ -8,7 +9,7 @@ const HeroSection = () => {
   return (
     <section className="relative py-20 md:py-32 text-center overflow-hidden h-[60vh] md:h-[70vh]">
       <Image
-        src="/HeaderImage2.jpg" 
+        src="/HeroImage.avif" 
         alt="Young students hanging out in Barcelona, exemplifying spontaneous connections."
         layout="fill"
         objectFit="cover"
@@ -26,8 +27,8 @@ const HeroSection = () => {
         </p>
         <Button 
           size="lg" 
-          variant="default"
-          className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full text-lg px-8 py-6 shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+          variant="default" // Provides text-primary-foreground
+          className="bg-gradient-to-r from-[#0367A6] to-[#D9043D] text-primary-foreground hover:brightness-90 rounded-full text-lg px-8 py-6 shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
           aria-label="Download the Rauxa App"
         >
           <ArrowDown className="mr-2 h-5 w-5" /> Download the App
@@ -38,3 +39,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
