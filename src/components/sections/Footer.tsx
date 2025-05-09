@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Instagram, Twitter, Facebook } from 'lucide-react';
+import { Instagram, Twitter, Facebook, Sparkles } from 'lucide-react';
 import RauxaLogo from '@/components/RauxaLogo';
 
 const Footer = () => {
@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 items-center">
           <div className="flex justify-center md:justify-start">
             <Link href="/" aria-label="Rauxa Home">
-              <RauxaLogo className="text-secondary" />
+              <RauxaLogo icon={<Sparkles className="text-accent" />} />
             </Link>
           </div>
           

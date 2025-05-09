@@ -1,21 +1,25 @@
-import type { HTMLAttributes } from 'react';
+import type { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 interface RauxaLogoProps extends HTMLAttributes<HTMLHeadingElement> {
-  // Additional props can be defined here if needed
+  icon?: ReactNode;
+  iconClassName?: string;
 }
 
-const RauxaLogo: React.FC<RauxaLogoProps> = ({ className, ...props }) => {
+const RauxaLogo: React.FC<RauxaLogoProps> = ({ className, icon, iconClassName, ...props }) => {
   return (
-    <h1
-      className={cn(
-        "font-poppins text-3xl font-bold tracking-tight text-secondary hover:text-opacity-80 transition-colors",
-        className
-      )}
-      {...props}
-    >
-      Rauxa
-    </h1>
+    <div className="flex items-center gap-2">
+      {icon && <span className={cn("h-7 w-7 sm:h-8 sm:w-8", iconClassName)}>{icon}</span>}
+      <h1
+        className={cn(
+          "font-poppins text-3xl font-bold tracking-tight text-primary hover:text-primary/80 transition-colors",
+          className
+        )}
+        {...props}
+      >
+        Rauxa
+      </h1>
+    </div>
   );
 };
 
