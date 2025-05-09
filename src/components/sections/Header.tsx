@@ -27,7 +27,7 @@ const Header = () => {
           className="bg-gradient-to-r from-[#0367A6] to-[#D9043D] text-primary-foreground hover:brightness-90 rounded-full text-sm px-6 py-2 shadow-md transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
           aria-label="Download the Rauxa App"
         >
-          Download the App
+          Download Now
         </Button>
       </div>
     </header>

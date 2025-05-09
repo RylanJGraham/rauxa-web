@@ -30,7 +30,7 @@ const HeroSection = () => {
           className="bg-gradient-to-r from-[#0367A6] to-[#D9043D] text-primary-foreground hover:brightness-90 rounded-full text-lg px-8 py-6 shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
           aria-label="Download the Rauxa App"
         >
-          Download the App
+          Download Now
         </Button>
       </div>
     </section>
@@ -38,7 +38,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
-
-
-
