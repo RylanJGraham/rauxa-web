@@ -10,7 +10,7 @@ const RauxaDefinitionSection = () => {
       fill="none" 
       xmlns="http://www.w3.org/2000/svg"
       aria-label="Catalan Flag (Senyera)"
-      className="object-cover w-full h-full" // Changed from object-contain to ensure it fills the rounded div
+      className="object-cover w-full h-full"
     >
       <title>Catalan Flag (Senyera)</title>
       {/* Yellow background */}
@@ -26,8 +26,7 @@ const RauxaDefinitionSection = () => {
   return (
     <section className="py-16 md:py-24 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Removed max-w-4xl mx-auto wrapper div to allow content to use full container width */}
-        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start mb-10">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-4 items-start mb-10">
           {/* Column 1: Rauxa and Pronunciation */}
           <div className="md:w-1/3 flex flex-col items-start text-left">
             <h2 
@@ -71,3 +70,4 @@ const RauxaDefinitionSection = () => {
 };
 
 export default RauxaDefinitionSection;
+
