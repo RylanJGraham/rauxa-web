@@ -1,0 +1,82 @@
+"use client";
+
+import { useFormState, useFormStatus } from 'react-dom';
+import { useEffect } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { subscribeToNewsletter } from '@/app/actions';
+import { useToast } from '@/hooks/use-toast';
+import { Mail, CheckCircle, AlertTriangle } from 'lucide-react';
+
+const initialState = {
+  message: null,
+  error: null,
+};
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button 
+      type="submit" 
+      aria-disabled={pending} 
+      disabled={pending}
+      className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg text-base px-6 py-3 shadow-md transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+    >
+      {pending ? 'Subscribing...' : 'Subscribe Now'}
+      {!pending && <Mail className="ml-2 h-5 w-5" />}
+    </Button>
+  );
+}
+
+const NewsletterSection = () => {
+  const [state, formAction] = useFormState(subscribeToNewsletter, initialState);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (state?.message) {
+      toast({
+        title: "Success!",
+        description: state.message,
+        variant: 'default',
+        action: <CheckCircle className="text-green-500" />,
+      });
+    }
+    if (state?.error) {
+      toast({
+        title: "Oops!",
+        description: state.error,
+        variant: 'destructive',
+        action: <AlertTriangle className="text-yellow-500" />,
+      });
+    }
+  }, [state, toast]);
+
+  return (
+    <section className="py-16 md:py-24 bg-secondary text-secondary-foreground">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+          Be the First to Hear About Our Launch!
+        </h2>
+        <p className="text-lg sm:text-xl mb-10 max-w-xl mx-auto text-secondary-foreground/90">
+          Join our community and get exclusive updates, early access, and special launch day surprises.
+        </p>
+        <form action={formAction} className="max-w-lg mx-auto">
+          <div className="flex flex-col sm:flex-row gap-4 items-center">
+            <Input
+              type="email"
+              name="email"
+              placeholder="Enter your email address"
+              required
+              className="flex-grow bg-background/90 text-foreground placeholder:text-muted-foreground border-border focus:ring-accent focus:border-accent rounded-lg text-base p-3"
+              aria-label="Email address for newsletter"
+            />
+            <SubmitButton />
+          </div>
+          {/* Form state messages can be displayed here if needed, but toast is primary feedback */}
+        </form>
+      </div>
+    </section>
+  );
+};
+
+export default NewsletterSection;
