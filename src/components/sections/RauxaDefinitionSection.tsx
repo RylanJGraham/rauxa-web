@@ -42,7 +42,7 @@ const RauxaDefinitionSection = () => {
           </div>
 
           {/* Divider: Catalan Flag */}
-          <div className="hidden md:flex md:w-1/4 items-center justify-center h-[150px] overflow-hidden rounded-lg">
+          <div className="md:flex h-[150px] w-[400px] overflow-hidden rounded-lg">
             {catalanFlagSVG}
           </div>
 
