@@ -6,18 +6,18 @@ import Image from 'next/image';
 
 const HeroSection = () => {
   return (
-    <section className="relative py-20 md:py-32 text-center overflow-hidden">
+    <section className="relative py-20 md:py-32 text-center overflow-hidden h-[60vh] md:h-[70vh]">
       <Image
-        src="https://picsum.photos/1200/800?random=15" 
-        alt="Young students hanging out in Barcelona"
+        src="/HeroImage.avif" 
+        alt="Young students hanging out in Barcelona, exemplifying spontaneous connections."
         layout="fill"
         objectFit="cover"
         className="z-0"
-        data-ai-hint="students barcelona"
+        data-ai-hint="barcelona students"
         priority
       />
-      <div className="absolute inset-0 bg-black/60 z-1"></div> {/* Overlay for text readability */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="absolute inset-0 bg-black/70 z-1"></div> {/* Overlay for text readability, increased opacity */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center justify-center h-full">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-primary-foreground tracking-tight">
           Spontaneous Plans, <br className="sm:hidden"/>Real Connections
         </h1>
@@ -38,4 +38,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
