@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Smartphone, Search, Users } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -26,27 +27,34 @@ const steps: Step[] = [
   },
 ];
 
+const cardStyles = [
+  { headerBg: 'bg-primary', textIconColor: 'text-primary-foreground' }, // Red bg, White text/icon
+  { headerBg: 'bg-secondary', textIconColor: 'text-secondary-foreground' }, // Blue bg, White text/icon
+  { headerBg: 'bg-accent', textIconColor: 'text-accent-foreground' }, // Yellow bg, Dark text/icon for contrast
+];
+
 const HowItWorksSection = () => {
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 md:mb-16 text-primary">
-          How Rauxa Works
+        <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 md:mb-16 text-foreground">
+          Rauxa Features
         </h2>
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-          {steps.map((step, index) => (
-            <Card key={index} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out rounded-xl overflow-hidden">
-              <CardHeader className="bg-secondary/10">
-                <div className="mx-auto bg-accent text-accent-foreground rounded-full p-4 w-fit mb-4">
-                  <step.icon className="h-10 w-10" />
-                </div>
-                <CardTitle className="text-2xl font-semibold text-secondary">{step.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="pt-4">
-                <p className="text-muted-foreground text-lg">{step.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+          {steps.map((step, index) => {
+            const currentStyle = cardStyles[index % cardStyles.length];
+            return (
+              <Card key={index} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out rounded-xl overflow-hidden">
+                <CardHeader className={`p-6 ${currentStyle.headerBg}`}>
+                  <step.icon className={`h-12 w-12 mx-auto mb-4 ${currentStyle.textIconColor}`} />
+                  <CardTitle className={`text-2xl font-semibold ${currentStyle.textIconColor}`}>{step.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-6 bg-card">
+                  <p className="text-muted-foreground text-lg">{step.description}</p>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>
