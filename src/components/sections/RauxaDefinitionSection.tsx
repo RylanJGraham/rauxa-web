@@ -1,9 +1,28 @@
 
 "use client";
 
-import Image from 'next/image';
-
 const RauxaDefinitionSection = () => {
+  const catalanFlagSVG = (
+    <svg 
+      width="24" 
+      height="150" 
+      viewBox="0 0 24 150" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Catalan Flag (Senyera)"
+      className="object-contain"
+    >
+      <title>Catalan Flag (Senyera)</title>
+      {/* Yellow background */}
+      <rect width="24" height="150" fill="#FECB00"/>
+      {/* Red stripes (4) */}
+      <rect y={150/9 * 1} width="24" height={150/9} fill="#DA121A"/>
+      <rect y={150/9 * 3} width="24" height={150/9} fill="#DA121A"/>
+      <rect y={150/9 * 5} width="24" height={150/9} fill="#DA121A"/>
+      <rect y={150/9 * 7} width="24" height={150/9} fill="#DA121A"/>
+    </svg>
+  );
+
   return (
     <section className="py-16 md:py-24 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,7 +36,7 @@ const RauxaDefinitionSection = () => {
                 Rauxa
               </h2>
               <p 
-                className="text-lg sm:text-xl text-muted-foreground"
+                className="text-lg sm:text-xl text-primary-foreground" // Changed from text-muted-foreground
               >
                 (Catalan: <span className="italic">/ˈraw.ʃə/</span>)
               </p>
@@ -25,14 +44,7 @@ const RauxaDefinitionSection = () => {
 
             {/* Divider: Catalan Flag (visible on md screens and up) */}
             <div className="hidden md:flex items-center justify-center">
-              <Image
-                src="https://picsum.photos/24/150" 
-                alt="Catalan Flag Divider"
-                width={24}
-                height={150}
-                className="object-contain"
-                data-ai-hint="Catalan flag"
-              />
+              {catalanFlagSVG}
             </div>
 
             {/* Column 2: Definition */}
@@ -60,4 +72,3 @@ const RauxaDefinitionSection = () => {
 };
 
 export default RauxaDefinitionSection;
-
