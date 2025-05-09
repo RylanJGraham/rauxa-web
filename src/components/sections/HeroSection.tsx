@@ -9,7 +9,7 @@ const HeroSection = () => {
   return (
     <section className="relative py-20 md:py-32 text-center overflow-hidden h-[60vh] md:h-[70vh]">
       <Image
-        src="/HeroImage.avif" 
+        src="/HeaderImage2.png" 
         alt="Young students hanging out in Barcelona, exemplifying spontaneous connections."
         layout="fill"
         objectFit="cover"
