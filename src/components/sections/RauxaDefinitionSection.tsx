@@ -1,12 +1,14 @@
 
 "use client";
 
+import Image from 'next/image';
+
 const RauxaDefinitionSection = () => {
   return (
     <section className="py-16 md:py-24 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start mb-10">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center mb-10">
             {/* Column 1: Rauxa and Pronunciation */}
             <div className="md:w-1/3 flex flex-col items-start md:items-end text-left md:text-right">
               <h2 
@@ -21,8 +23,20 @@ const RauxaDefinitionSection = () => {
               </p>
             </div>
 
+            {/* Divider: Catalan Flag (visible on md screens and up) */}
+            <div className="hidden md:flex items-center justify-center">
+              <Image
+                src="https://picsum.photos/24/150" 
+                alt="Catalan Flag Divider"
+                width={24}
+                height={150}
+                className="object-contain"
+                data-ai-hint="Catalan flag"
+              />
+            </div>
+
             {/* Column 2: Definition */}
-            <div className="md:w-2/3 md:pl-6 md:border-l border-border">
+            <div className="md:w-2/3">
               <div className="p-6 border border-border rounded-lg shadow-md bg-card h-full flex items-center">
                 <p 
                   className="text-xl sm:text-2xl text-card-foreground leading-relaxed"
@@ -46,3 +60,4 @@ const RauxaDefinitionSection = () => {
 };
 
 export default RauxaDefinitionSection;
+
