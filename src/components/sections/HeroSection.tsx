@@ -2,7 +2,6 @@
 "use client";
 
 import { Button } from '@/components/ui/button';
-import { ArrowDown } from 'lucide-react';
 import Image from 'next/image';
 
 const HeroSection = () => {
@@ -28,10 +27,10 @@ const HeroSection = () => {
         <Button 
           size="lg" 
           variant="default" // Provides text-primary-foreground
-          className="bg-gradient-to-r from-[#0367A6] to-[#D9043D] text-primary-foreground hover:brightness-90 rounded-full text-lg px-8 py-6 shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+          className="font-bold bg-gradient-to-r from-[#0367A6] to-[#D9043D] text-primary-foreground hover:brightness-90 rounded-full text-lg px-8 py-6 shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
           aria-label="Download the Rauxa App"
         >
-          <ArrowDown className="mr-2 h-5 w-5" /> Download the App
+          Download the App
         </Button>
       </div>
     </section>
@@ -39,5 +38,6 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
 
 
