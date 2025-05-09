@@ -10,7 +10,7 @@ const Header = () => {
           <RauxaLogo 
             icon={
               <Image 
-                src="/rauxa-logo.png" 
+                src="/rauxalogo.png" 
                 alt="Rauxa App Icon" 
                 width={32} 
                 height={32} 

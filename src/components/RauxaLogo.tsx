@@ -12,7 +12,7 @@ const RauxaLogo: React.FC<RauxaLogoProps> = ({ className, icon, iconClassName, .
       {icon && <span className={cn("h-7 w-7 sm:h-8 sm:w-8", iconClassName)}>{icon}</span>}
       <h1
         className={cn(
-          "font-poppins text-3xl font-bold tracking-tight text-primary hover:text-primary/80 transition-colors",
+          "font-poppins text-3xl font-bold tracking-tight bg-gradient-to-r from-[#0367A6] to-[#D9043D] bg-clip-text text-transparent",
           className
         )}
         {...props}

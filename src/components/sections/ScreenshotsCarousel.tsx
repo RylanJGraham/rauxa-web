@@ -4,11 +4,11 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 
 const screenshots = [
-  { id: 1, src: "https://picsum.photos/300/600?random=1", alt: "App Screenshot 1", hint: "app screen" },
-  { id: 2, src: "https://picsum.photos/300/600?random=2", alt: "App Screenshot 2", hint: "app interface" },
-  { id: 3, src: "https://picsum.photos/300/600?random=3", alt: "App Screenshot 3", hint: "user profile" },
-  { id: 4, src: "https://picsum.photos/300/600?random=4", alt: "App Screenshot 4", hint: "event details" },
-  { id: 5, src: "https://picsum.photos/300/600?random=5", alt: "App Screenshot 5", hint: "map view" },
+  { id: 1, src: "/Demo/Demo1.png", alt: "App Screenshot 1", hint: "app screen" },
+  { id: 2, src: "/Demo/Demo2.png", alt: "App Screenshot 2", hint: "app interface" },
+  { id: 3, src: "/Demo/Demo3.png", alt: "App Screenshot 3", hint: "user profile" },
+  { id: 4, src: "/Demo/Demo4.png", alt: "App Screenshot 4", hint: "event details" },
+  { id: 5, src: "/Demo/Demo5.png", alt: "App Screenshot 5", hint: "map view" },
 ];
 
 const ScreenshotsCarousel = () => {
