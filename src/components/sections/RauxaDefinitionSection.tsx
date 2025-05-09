@@ -26,9 +26,9 @@ const RauxaDefinitionSection = () => {
   return (
     <section className="py-16 md:py-24 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row gap-6 md:gap-4 items-start mb-10">
+        <div className="flex flex-col md:flex-row gap-2 items-start mb-10">
           {/* Column 1: Rauxa and Pronunciation */}
-          <div className="md:w-1/3 flex flex-col items-start text-left">
+          <div className="w-full md:w-1/4 flex flex-col items-start text-left">
             <h2 
               className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-primary-foreground mb-2"
             >
@@ -41,13 +41,13 @@ const RauxaDefinitionSection = () => {
             </p>
           </div>
 
-          {/* Divider: Catalan Flag (visible on md screens and up) */}
-          <div className="hidden md:flex items-center justify-center h-[150px] w-[24px] overflow-hidden rounded-lg">
+          {/* Divider: Catalan Flag */}
+          <div className="hidden md:flex md:w-1/4 items-center justify-center h-[150px] overflow-hidden rounded-lg">
             {catalanFlagSVG}
           </div>
 
           {/* Column 2: Definition */}
-          <div className="md:w-2/3">
+          <div className="w-full md:w-1/2">
             <div className="p-6 border border-border rounded-lg shadow-md bg-card h-full flex items-center">
               <p 
                 className="text-xl sm:text-2xl text-card-foreground leading-relaxed text-left"
