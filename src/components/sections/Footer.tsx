@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Instagram, Twitter, Facebook, Shapes } from 'lucide-react'; // Changed from Sparkles to Shapes
+import Image from 'next/image';
+import { Instagram, Twitter, Facebook } from 'lucide-react';
 import RauxaLogo from '@/components/RauxaLogo';
 
 const Footer = () => {
@@ -11,7 +12,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 items-center">
           <div className="flex justify-center md:justify-start">
             <Link href="/" aria-label="Rauxa Home">
-              <RauxaLogo icon={<Shapes className="text-accent" />} /> {/* Changed icon here */}
+              <RauxaLogo 
+                icon={
+                  <Image 
+                    src="/rauxa-logo.png" 
+                    alt="Rauxa App Icon" 
+                    width={32} 
+                    height={32} 
+                    data-ai-hint="app logo"
+                  />
+                } 
+              />
             </Link>
           </div>
           
@@ -48,3 +59,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

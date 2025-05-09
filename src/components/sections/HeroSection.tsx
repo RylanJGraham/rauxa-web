@@ -2,13 +2,23 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowDown } from 'lucide-react';
+import Image from 'next/image';
 
 const HeroSection = () => {
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-secondary via-primary/30 to-background text-center overflow-hidden">
-      <div className="absolute inset-0 opacity-10 pattern-bg"></div>
+    <section className="relative py-20 md:py-32 text-center overflow-hidden">
+      <Image
+        src="https://picsum.photos/1200/800?random=15" 
+        alt="Young students hanging out in Barcelona"
+        layout="fill"
+        objectFit="cover"
+        className="z-0"
+        data-ai-hint="students barcelona"
+        priority
+      />
+      <div className="absolute inset-0 bg-black/60 z-1"></div> {/* Overlay for text readability */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-primary-foreground  tracking-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-primary-foreground tracking-tight">
           Spontaneous Plans, <br className="sm:hidden"/>Real Connections
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl text-primary-foreground/90 mb-10 max-w-2xl mx-auto">
@@ -23,14 +33,9 @@ const HeroSection = () => {
           <ArrowDown className="mr-2 h-5 w-5" /> Download the App
         </Button>
       </div>
-      <style jsx>{`
-        .pattern-bg {
-          background-image: radial-gradient(circle, hsl(var(--accent) / 0.1) 1px, transparent 1px);
-          background-size: 1.5rem 1.5rem;
-        }
-      `}</style>
     </section>
   );
 };
 
 export default HeroSection;
+
