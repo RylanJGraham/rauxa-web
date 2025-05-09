@@ -9,7 +9,7 @@ const HeroSection = () => {
   return (
     <section className="relative py-20 md:py-32 text-center overflow-hidden h-[60vh] md:h-[70vh]">
       <Image
-        src="/HeaderImage2.png" 
+        src="/HeaderImage2.jpg" 
         alt="Young students hanging out in Barcelona, exemplifying spontaneous connections."
         layout="fill"
         objectFit="cover"
@@ -39,4 +39,5 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
 
