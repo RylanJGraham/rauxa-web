@@ -13,7 +13,7 @@ const RauxaDefinitionSection = () => {
       scale: 1,
       transition: { 
         duration: 0.8,
-        ease: [0.6, 0.05, -0.01, 0.9], // Smooth cubic bezier
+        ease: [0.6, 0.05, -0.01, 0.9], // Corrected: Framer Motion expects an array for cubic-bezier
       } 
     },
   };
