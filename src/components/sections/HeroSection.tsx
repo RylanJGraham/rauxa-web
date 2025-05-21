@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const HeroSection = () => {
   return (
-    <section className="relative py-20 md:py-32 text-center overflow-hidden h-[70vh] md:h-[80vh]">
+    <section className="relative py-20 md:py-32 text-center overflow-hidden h-[70vh] md:h-[90vh]">
       <Image
         src="/HeaderImage2.jpg" 
         alt="Young students hanging out in Barcelona, exemplifying spontaneous connections."
@@ -22,7 +22,7 @@ const HeroSection = () => {
           Spontaneous Plans, <br className="sm:hidden"/>Real Connections
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl text-primary-foreground/90 mb-10 max-w-2xl mx-auto">
-          Rauxa helps you meet people and join events — instantly.
+          Rauxa helps you meet people and join events <strong className="font-bold">instantly</strong>
         </p>
         <Button 
           size="lg" 

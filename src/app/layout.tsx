@@ -12,7 +12,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'Rauxa - Spontaneous Plans, Real Connections',
-  description: 'Rauxa helps you meet people and join events — instantly. Discover spontaneous plans and make real connections in your city.',
+  description: 'Rauxa helps you meet people and join events instantly. Discover spontaneous plans and make real connections in your city.',
 };
 
 export default function RootLayout({
