@@ -1,4 +1,3 @@
-
 "use client";
 
 const RauxaDefinitionSection = () => {
@@ -26,11 +25,11 @@ const RauxaDefinitionSection = () => {
   return (
     <section className="py-16 md:py-24 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row gap-8 items-stretch mb-10"> {/* Changed items-start to items-stretch */}
+        <div className="flex flex-col md:flex-row gap-8 items-stretch mb-10"> {/* items-stretch ensures columns match height */}
           {/* Left Part (1/3 width) */}
-          <div className="w-full md:w-1/3 flex flex-row gap-2 items-stretch"> {/* Changed items-start to items-stretch */}
+          <div className="w-full md:w-1/3 flex flex-row gap-2 items-stretch"> {/* items-stretch ensures Rauxa text part and Flag part match height within this column */}
             {/* Column 1: Rauxa and Pronunciation */}
-            <div className="flex-shrink-0 flex flex-col items-start text-left justify-center"> {/* Added justify-center for vertical alignment if needed */}
+            <div className="flex-shrink-0 flex flex-col items-start text-left justify-center"> {/* justify-center will vertically center if space available */}
               <h2 
                 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-primary-foreground mb-2"
               >
@@ -44,14 +43,15 @@ const RauxaDefinitionSection = () => {
             </div>
 
             {/* Divider: Catalan Flag */}
-            <div className="flex-grow h-full overflow-hidden rounded-lg"> {/* Removed h-[150px], added h-full */}
+            <div className="flex-grow h-full overflow-hidden rounded-lg"> {/* flex-grow takes width, h-full takes height from parent */}
               {catalanFlagSVG}
             </div>
           </div>
 
           {/* Right Part (2/3 width) - Column 2: Definition */}
           <div className="w-full md:w-2/3">
-            <div className="p-6 border border-border rounded-lg shadow-md bg-card h-full flex items-center">
+            {/* Removed h-full from this div so its height is determined by its content */}
+            <div className="p-6 border border-border rounded-lg shadow-md bg-card flex items-center"> 
               <p 
                 className="text-xl sm:text-2xl text-card-foreground leading-relaxed text-left"
               >
@@ -73,4 +73,3 @@ const RauxaDefinitionSection = () => {
 };
 
 export default RauxaDefinitionSection;
-
