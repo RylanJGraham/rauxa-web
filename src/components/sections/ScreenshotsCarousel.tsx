@@ -27,7 +27,6 @@ const ScreenshotsCarousel = () => {
 
   const startAutoplay = useCallback(() => {
     if (!api) return;
-    // Clear any existing interval before starting a new one
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
@@ -35,9 +34,9 @@ const ScreenshotsCarousel = () => {
       if (api.canScrollNext()) {
         api.scrollNext();
       } else {
-        api.scrollTo(0); // Loop back to the beginning
+        api.scrollTo(0); 
       }
-    }, 3000); // Auto-scroll every 3 seconds
+    }, 3000); 
   }, [api]);
 
   const stopAutoplay = useCallback(() => {
@@ -51,8 +50,8 @@ const ScreenshotsCarousel = () => {
     if (!api) {
       return;
     }
-    startAutoplay(); // Start autoplay when api is available
-    return () => stopAutoplay(); // Clean up on unmount
+    startAutoplay(); 
+    return () => stopAutoplay(); 
   }, [api, startAutoplay, stopAutoplay]);
 
   return (
@@ -75,7 +74,7 @@ const ScreenshotsCarousel = () => {
             {screenshots.map((screenshot) => (
               <CarouselItem key={screenshot.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3">
                 <div className="p-1 h-full">
-                  <Card className="overflow-hidden rounded-xl shadow-lg h-full transform transition-transform duration-300 hover:scale-105 aspect-[9/19]">
+                  <Card className="overflow-hidden rounded-xl shadow-lg h-full transform transition-transform duration-300 hover:scale-105 aspect-[9/19] md:max-w-xs mx-auto">
                     <CardContent className="p-0 flex items-center justify-center h-full">
                       <div className="relative w-full h-full">
                         <Image
@@ -83,7 +82,7 @@ const ScreenshotsCarousel = () => {
                           alt={screenshot.alt}
                           fill
                           className="object-contain"
-                          sizes="(max-width: 639px) 95vw, (max-width: 767px) 45vw, 30vw"
+                          sizes="(max-width: 639px) 90vw, (max-width: 767px) 45vw, 320px"
                           data-ai-hint={screenshot.hint}
                         />
                       </div>
@@ -102,3 +101,4 @@ const ScreenshotsCarousel = () => {
 };
 
 export default ScreenshotsCarousel;
+
