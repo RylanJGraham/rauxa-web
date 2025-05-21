@@ -43,12 +43,12 @@ const steps: Step[] = [
 ];
 
 const cardStyles = [
-  { headerBg: 'bg-primary', textIconColor: 'text-primary-foreground' }, // Card 1
-  { headerBg: 'bg-secondary', textIconColor: 'text-secondary-foreground' }, // Card 2
-  { headerBg: 'bg-accent', textIconColor: 'text-primary-foreground' }, // Card 3
-  { headerBg: 'bg-custom-deep-red', textIconColor: 'text-primary-foreground' }, // Card 4 (Connect & Chat)
-  { headerBg: 'bg-custom-deep-blue', textIconColor: 'text-primary-foreground' }, // Card 5 (Host Your Vibe)
-  { headerBg: 'bg-custom-muted-gold', textIconColor: 'text-primary-foreground' }, // Card 6 (Safe & Secure)
+  { headerBg: 'bg-gradient-stop-1', textIconColor: 'text-primary-foreground' }, // Card 1: #0367A6
+  { headerBg: 'bg-gradient-stop-2', textIconColor: 'text-primary-foreground' }, // Card 2: #2D5391
+  { headerBg: 'bg-gradient-stop-3', textIconColor: 'text-primary-foreground' }, // Card 3: #583F7C
+  { headerBg: 'bg-gradient-stop-4', textIconColor: 'text-primary-foreground' }, // Card 4: #832B67
+  { headerBg: 'bg-gradient-stop-5', textIconColor: 'text-primary-foreground' }, // Card 5: #AE1752
+  { headerBg: 'bg-gradient-stop-6', textIconColor: 'text-primary-foreground' }, // Card 6: #D9043D
 ];
 
 const HowItWorksSection = () => {
@@ -60,7 +60,7 @@ const HowItWorksSection = () => {
         </h2>
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {steps.map((step, index) => {
-            const currentStyle = cardStyles[index]; // Direct indexing as we have 6 styles for 6 cards
+            const currentStyle = cardStyles[index]; 
             return (
               <Card key={index} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out rounded-xl overflow-hidden">
                 <CardHeader className={`p-6 ${currentStyle.headerBg}`}>

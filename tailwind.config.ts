@@ -63,6 +63,12 @@ export default {
         'custom-deep-red': 'hsl(var(--custom-deep-red))',
         'custom-deep-blue': 'hsl(var(--custom-deep-blue))',
         'custom-muted-gold': 'hsl(var(--custom-muted-gold))',
+        'gradient-stop-1': 'hsl(var(--gradient-stop-1))',
+        'gradient-stop-2': 'hsl(var(--gradient-stop-2))',
+        'gradient-stop-3': 'hsl(var(--gradient-stop-3))',
+        'gradient-stop-4': 'hsl(var(--gradient-stop-4))',
+        'gradient-stop-5': 'hsl(var(--gradient-stop-5))',
+        'gradient-stop-6': 'hsl(var(--gradient-stop-6))',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
