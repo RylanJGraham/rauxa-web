@@ -1,7 +1,15 @@
+
 "use client";
 
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 
 const screenshots = [
   { id: 1, src: "/Demo/Demo1.png", alt: "App Screenshot 1", hint: "app screen" },
@@ -12,49 +20,80 @@ const screenshots = [
 ];
 
 const ScreenshotsCarousel = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startAutoplay = useCallback(() => {
+    if (!api) return;
+    // Clear any existing interval before starting a new one
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      if (api.canScrollNext()) {
+        api.scrollNext();
+      } else {
+        api.scrollTo(0); // Loop back to the beginning
+      }
+    }, 3000); // Auto-scroll every 3 seconds
+  }, [api]);
+
+  const stopAutoplay = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+    startAutoplay(); // Start autoplay when api is available
+    return () => stopAutoplay(); // Clean up on unmount
+  }, [api, startAutoplay, stopAutoplay]);
+
   return (
     <section className="py-16 md:py-24 bg-secondary/5">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12 md:mb-16 text-primary">
           See Rauxa in Action
         </h2>
-        <div className="flex overflow-x-auto space-x-6 pb-4 scrollbar-thin scrollbar-thumb-accent scrollbar-track-accent/20">
-          {screenshots.map((screenshot) => (
-            <div key={screenshot.id} className="flex-shrink-0 w-[250px] sm:w-[300px]">
-              <Card className="overflow-hidden rounded-xl shadow-lg h-full transform transition-transform duration-300 hover:scale-105">
-                <CardContent className="p-0">
-                  <Image
-                    src={screenshot.src}
-                    alt={screenshot.alt}
-                    width={300}
-                    height={600}
-                    className="object-cover w-full h-auto aspect-[1/2]"
-                    data-ai-hint={screenshot.hint}
-                  />
-                </CardContent>
-              </Card>
-            </div>
-          ))}
-        </div>
+        <Carousel
+          setApi={setApi}
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+          onMouseEnter={stopAutoplay}
+          onMouseLeave={startAutoplay}
+        >
+          <CarouselContent className="-ml-4">
+            {screenshots.map((screenshot) => (
+              <CarouselItem key={screenshot.id} className="pl-4 basis-[250px] sm:basis-[300px]">
+                <div className="p-1 h-full">
+                  <Card className="overflow-hidden rounded-xl shadow-lg h-full transform transition-transform duration-300 hover:scale-105 aspect-[1/2]">
+                    <CardContent className="p-0 flex items-center justify-center h-full">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={screenshot.src}
+                          alt={screenshot.alt}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 639px) 226px, 276px" // Approx: basis - (1rem + 0.25rem*2 for p-1)
+                          data-ai-hint={screenshot.hint}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          {/* Optional: Add <CarouselPrevious /> and <CarouselNext /> here if navigation buttons are desired */}
+        </Carousel>
       </div>
-      <style jsx>{`
-        .scrollbar-thin {
-          scrollbar-width: thin;
-          scrollbar-color: hsl(var(--accent)) hsl(var(--accent) / 0.2);
-        }
-        .scrollbar-thin::-webkit-scrollbar {
-          height: 8px;
-        }
-        .scrollbar-thin::-webkit-scrollbar-track {
-          background: hsl(var(--accent) / 0.2);
-          border-radius: 10px;
-        }
-        .scrollbar-thin::-webkit-scrollbar-thumb {
-          background-color: hsl(var(--accent));
-          border-radius: 10px;
-          border: 2px solid hsl(var(--accent) / 0.2);
-        }
-      `}</style>
     </section>
   );
 };
