@@ -66,7 +66,7 @@ const ScreenshotsCarousel = () => {
             align: "start",
             loop: true,
           }}
-          className="w-full"
+          className="w-full max-w-screen-lg mx-auto"
           onMouseEnter={stopAutoplay}
           onMouseLeave={startAutoplay}
         >
@@ -101,4 +101,3 @@ const ScreenshotsCarousel = () => {
 };
 
 export default ScreenshotsCarousel;
-
