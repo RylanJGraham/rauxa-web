@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const HeroSection = () => {
   return (
-    <section className="relative py-20 md:py-32 text-center overflow-hidden h-[60vh] md:h-[70vh]">
+    <section className="relative py-20 md:py-32 text-center overflow-hidden h-[70vh] md:h-[80vh]">
       <Image
         src="/HeaderImage2.jpg" 
         alt="Young students hanging out in Barcelona, exemplifying spontaneous connections."

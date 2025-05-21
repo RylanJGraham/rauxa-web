@@ -26,28 +26,31 @@ const RauxaDefinitionSection = () => {
   return (
     <section className="py-16 md:py-24 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row gap-2 items-start mb-10">
-          {/* Column 1: Rauxa and Pronunciation */}
-          <div className="w-full md:w-1/4 flex flex-col items-start text-left">
-            <h2 
-              className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-primary-foreground mb-2"
-            >
-              Rauxa
-            </h2>
-            <p 
-              className="text-lg sm:text-xl text-primary-foreground"
-            >
-              (Catalan: <span className="italic">/ˈraw.ʃə/</span>)
-            </p>
+        <div className="flex flex-col md:flex-row gap-8 items-start mb-10">
+          {/* Left Part (1/3 width) */}
+          <div className="w-full md:w-1/3 flex flex-row gap-2 items-start">
+            {/* Column 1: Rauxa and Pronunciation */}
+            <div className="flex-shrink-0 flex flex-col items-start text-left">
+              <h2 
+                className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-primary-foreground mb-2"
+              >
+                Rauxa
+              </h2>
+              <p 
+                className="text-lg sm:text-xl text-primary-foreground"
+              >
+                (Catalan: <span className="italic">/ˈraw.ʃə/</span>)
+              </p>
+            </div>
+
+            {/* Divider: Catalan Flag */}
+            <div className="flex-grow h-[150px] overflow-hidden rounded-lg">
+              {catalanFlagSVG}
+            </div>
           </div>
 
-          {/* Divider: Catalan Flag */}
-          <div className="md:flex h-[150px] w-[400px] overflow-hidden rounded-lg">
-            {catalanFlagSVG}
-          </div>
-
-          {/* Column 2: Definition */}
-          <div className="w-full md:w-1/2">
+          {/* Right Part (2/3 width) - Column 2: Definition */}
+          <div className="w-full md:w-2/3">
             <div className="p-6 border border-border rounded-lg shadow-md bg-card h-full flex items-center">
               <p 
                 className="text-xl sm:text-2xl text-card-foreground leading-relaxed text-left"
@@ -70,4 +73,3 @@ const RauxaDefinitionSection = () => {
 };
 
 export default RauxaDefinitionSection;
-
