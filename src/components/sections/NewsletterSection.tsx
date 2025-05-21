@@ -1,16 +1,18 @@
+
 "use client";
 
 import { useActionState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { subscribeToNewsletter } from '@/app/actions';
+import { subscribeToNewsletter, type FormState } from '@/app/actions'; // Import FormState
 import { useToast } from '@/hooks/use-toast';
 import { Mail, CheckCircle, AlertTriangle } from 'lucide-react';
 
-const initialState = {
+const initialState: FormState = { // Use the imported FormState type
   message: null,
   error: null,
+  submittedEmail: null,
 };
 
 function SubmitButton() {
@@ -33,18 +35,27 @@ const NewsletterSection = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (state?.message) {
+    if (!state) return;
+
+    if (state.message) {
+      let toastDescription = state.message;
+      if (state.submittedEmail) {
+        toastDescription += ` Email: ${state.submittedEmail}.`;
+      }
       toast({
         title: "Success!",
-        description: state.message,
+        description: toastDescription,
         variant: 'default',
         action: <CheckCircle className="text-green-500" />,
       });
-    }
-    if (state?.error) {
+    } else if (state.error) {
+      let toastDescription = state.error;
+      if (state.submittedEmail) {
+        toastDescription += ` Attempted with: ${state.submittedEmail}.`;
+      }
       toast({
         title: "Oops!",
-        description: state.error,
+        description: toastDescription,
         variant: 'destructive',
         action: <AlertTriangle className="text-yellow-500" />,
       });
