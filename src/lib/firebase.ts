@@ -8,7 +8,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDotWj51D4OSUrtjb0ncA7Igo7Q6zgTu1M",
   authDomain: "rauxa-8f9bf.firebaseapp.com",
   projectId: "rauxa-8f9bf",
-  storageBucket: "rauxa-8f9bf.appspot.com", // Standard format is project-id.appspot.com
+  storageBucket: "rauxa-8f9bf.firebasestorage.app", // Updated to user-provided value
   messagingSenderId: "312076107505",
   appId: "1:312076107505:web:942a57438ae85c8b10f350"
 };
