@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Smartphone, Search, Users } from 'lucide-react';
+import { Smartphone, Search, Users, MessagesSquare, Sparkles } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface Step {
@@ -24,6 +24,16 @@ const steps: Step[] = [
     icon: Users,
     title: 'Join Instantly',
     description: 'Connect with new people and dive into exciting experiences.',
+  },
+  {
+    icon: MessagesSquare,
+    title: 'Connect & Chat',
+    description: 'Engage with event attendees through direct messages and group chats seamlessly.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Host Your Vibe',
+    description: 'Easily create your own meetups, from spontaneous hangouts to planned gatherings, with smart suggestions.',
   },
 ];
 
