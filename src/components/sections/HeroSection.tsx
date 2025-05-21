@@ -3,6 +3,7 @@
 
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const HeroSection = () => {
   return (
@@ -24,14 +25,16 @@ const HeroSection = () => {
         <p className="text-lg sm:text-xl md:text-2xl text-primary-foreground/90 mb-10 max-w-2xl mx-auto">
           Rauxa helps you meet people and join events <br /> <strong className="font-bold">instantly</strong>
         </p>
-        <Button 
-          size="lg" 
-          variant="default" // Provides text-primary-foreground
-          className="bg-gradient-to-r from-[#0367A6] to-[#D9043D] text-primary-foreground hover:brightness-90 rounded-full text-lg px-8 py-6 shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
-          aria-label="Download the Rauxa App"
-        >
-          Download Now
-        </Button>
+        <Link href="/updates" passHref>
+          <Button 
+            size="lg" 
+            variant="default" // Provides text-primary-foreground
+            className="bg-gradient-to-r from-[#0367A6] to-[#D9043D] text-primary-foreground hover:brightness-90 rounded-full text-lg px-8 py-6 shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+            aria-label="Get Rauxa App Updates"
+          >
+            Download Now
+          </Button>
+        </Link>
       </div>
     </section>
   );

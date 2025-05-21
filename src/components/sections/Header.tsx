@@ -21,14 +21,16 @@ const Header = () => {
             } 
           />
         </Link>
-        <Button 
-          size="default" 
-          variant="default"
-          className="bg-gradient-to-r from-[#0367A6] to-[#D9043D] text-primary-foreground hover:brightness-90 rounded-full text-sm px-6 py-2 shadow-md transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
-          aria-label="Download the Rauxa App"
-        >
-          Download Now
-        </Button>
+        <Link href="/updates" passHref>
+          <Button 
+            size="default" 
+            variant="default"
+            className="bg-gradient-to-r from-[#0367A6] to-[#D9043D] text-primary-foreground hover:brightness-90 rounded-full text-sm px-6 py-2 shadow-md transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
+            aria-label="Get Rauxa App Updates"
+          >
+            Download Now
+          </Button>
+        </Link>
       </div>
     </header>
   );

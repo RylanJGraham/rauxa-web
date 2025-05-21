@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Instagram, Twitter, Facebook } from 'lucide-react';
@@ -15,7 +16,7 @@ const Footer = () => {
               <RauxaLogo 
                 icon={
                   <Image 
-                    src="/rauxa-logo.png" 
+                    src="/rauxalogo.png" 
                     alt="Rauxa App Icon" 
                     width={32} 
                     height={32} 
@@ -29,10 +30,10 @@ const Footer = () => {
           <div className="flex flex-col items-center space-y-2">
             <p className="font-semibold text-foreground">Get the App</p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link href="/updates" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 App Store
               </Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link href="/updates" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Google Play
               </Link>
             </div>
@@ -59,4 +60,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
