@@ -30,7 +30,7 @@ const steps: Step[] = [
 const cardStyles = [
   { headerBg: 'bg-primary', textIconColor: 'text-primary-foreground' }, // Red bg, White text/icon
   { headerBg: 'bg-secondary', textIconColor: 'text-secondary-foreground' }, // Blue bg, White text/icon
-  { headerBg: 'bg-accent', textIconColor: 'text-accent-foreground' }, // Yellow bg, Dark text/icon for contrast
+  { headerBg: 'bg-accent', textIconColor: 'text-primary-foreground' }, // Yellow bg, White text/icon
 ];
 
 const HowItWorksSection = () => {
