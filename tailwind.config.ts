@@ -59,7 +59,10 @@ export default {
   				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
-  			}
+  			},
+        'custom-deep-red': 'hsl(var(--custom-deep-red))',
+        'custom-deep-blue': 'hsl(var(--custom-deep-blue))',
+        'custom-muted-gold': 'hsl(var(--custom-muted-gold))',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

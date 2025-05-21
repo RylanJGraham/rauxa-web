@@ -56,6 +56,11 @@ body {
     --sidebar-accent-foreground: 0 0% 10%; /* Match Accent Foreground */
     --sidebar-border: 0 0% 12%; /* Match Border */
     --sidebar-ring: 39 56% 66%; /* Match Ring */
+
+    /* Custom card colors */
+    --custom-deep-red: 348 80% 20%;
+    --custom-deep-blue: 203 89% 19%;
+    --custom-muted-gold: 41 23% 37%;
   }
 
   .dark {
@@ -105,6 +110,11 @@ body {
     --sidebar-accent-foreground: 0 0% 10%;
     --sidebar-border: 0 0% 12%;
     --sidebar-ring: 39 56% 66%;
+
+    /* Custom card colors */
+    --custom-deep-red: 348 80% 20%;
+    --custom-deep-blue: 203 89% 19%;
+    --custom-muted-gold: 41 23% 37%;
   }
 }
 

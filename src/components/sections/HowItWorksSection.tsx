@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Smartphone, Search, Users, MessagesSquare, Sparkles } from 'lucide-react';
+import { Smartphone, Search, Users, MessagesSquare, Sparkles, ShieldCheck } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface Step {
@@ -35,12 +35,20 @@ const steps: Step[] = [
     title: 'Host Your Vibe',
     description: 'Easily create your own meetups, from spontaneous hangouts to planned gatherings, with smart suggestions.',
   },
+  {
+    icon: ShieldCheck,
+    title: 'Safe & Secure',
+    description: 'Enjoy peace of mind with secure messaging, robust authentication, and privacy controls.',
+  }
 ];
 
 const cardStyles = [
-  { headerBg: 'bg-primary', textIconColor: 'text-primary-foreground' }, // Red bg, White text/icon
-  { headerBg: 'bg-secondary', textIconColor: 'text-secondary-foreground' }, // Blue bg, White text/icon
-  { headerBg: 'bg-accent', textIconColor: 'text-primary-foreground' }, // Yellow bg, White text/icon
+  { headerBg: 'bg-primary', textIconColor: 'text-primary-foreground' }, // Card 1
+  { headerBg: 'bg-secondary', textIconColor: 'text-secondary-foreground' }, // Card 2
+  { headerBg: 'bg-accent', textIconColor: 'text-primary-foreground' }, // Card 3
+  { headerBg: 'bg-custom-deep-red', textIconColor: 'text-primary-foreground' }, // Card 4 (Connect & Chat)
+  { headerBg: 'bg-custom-deep-blue', textIconColor: 'text-primary-foreground' }, // Card 5 (Host Your Vibe)
+  { headerBg: 'bg-custom-muted-gold', textIconColor: 'text-primary-foreground' }, // Card 6 (Safe & Secure)
 ];
 
 const HowItWorksSection = () => {
@@ -52,7 +60,7 @@ const HowItWorksSection = () => {
         </h2>
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {steps.map((step, index) => {
-            const currentStyle = cardStyles[index % cardStyles.length];
+            const currentStyle = cardStyles[index]; // Direct indexing as we have 6 styles for 6 cards
             return (
               <Card key={index} className="text-center shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out rounded-xl overflow-hidden">
                 <CardHeader className={`p-6 ${currentStyle.headerBg}`}>
