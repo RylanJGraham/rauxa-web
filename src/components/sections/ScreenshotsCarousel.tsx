@@ -7,6 +7,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import React, { useEffect, useState, useCallback, useRef } from 'react';
@@ -91,7 +93,8 @@ const ScreenshotsCarousel = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          {/* Optional: Add <CarouselPrevious /> and <CarouselNext /> here if navigation buttons are desired */}
+          <CarouselPrevious />
+          <CarouselNext />
         </Carousel>
       </div>
     </section>
@@ -99,4 +102,3 @@ const ScreenshotsCarousel = () => {
 };
 
 export default ScreenshotsCarousel;
-
