@@ -20,36 +20,37 @@ export async function subscribeToNewsletter(prevState: FormState | undefined, fo
 
   try {
     const validatedEmail = emailSchema.parse(email);
-    console.log("Attempting to subscribe email to Firestore:", validatedEmail);
+    console.log("Attempting to add email to waitlist in Firestore:", validatedEmail);
 
-    const subscribersRef = collection(db, "newsletter_subscribers");
+    const waitlistRef = collection(db, "waitlist");
     
     // Check if email already exists
-    const q = query(subscribersRef, where("email", "==", validatedEmail));
+    const q = query(waitlistRef, where("email", "==", validatedEmail));
     const querySnapshot = await getDocs(q);
 
     if (!querySnapshot.empty) {
-      return { message: null, error: "This email is already subscribed.", submittedEmail: validatedEmail };
+      return { message: null, error: "This email is already on the waitlist.", submittedEmail: validatedEmail };
     }
 
     // Add a new document with a generated id.
-    await addDoc(subscribersRef, {
+    await addDoc(waitlistRef, {
       email: validatedEmail,
-      subscribedAt: Timestamp.now(), // Use Firestore Timestamp for consistency
+      createdAt: Timestamp.now(), // Use Firestore Timestamp for consistency
     });
-    console.log("Successfully subscribed email to Firestore:", validatedEmail);
-    return { message: "Thank you for subscribing! We'll keep you posted.", error: null, submittedEmail: validatedEmail };
+    console.log("Successfully added email to waitlist in Firestore:", validatedEmail);
+    return { message: "Thank you for joining the waitlist! We'll keep you posted.", error: null, submittedEmail: validatedEmail };
 
   } catch (e) {
     if (e instanceof z.ZodError) {
       return { message: null, error: e.errors[0].message, submittedEmail: rawEmailString };
     }
     
-    console.error("Newsletter subscription error:", e);
+    console.error("Waitlist subscription error:", e);
     
     // Check for specific Firebase error codes if needed, e.g., permission denied
     // For example: if (e.code === 'permission-denied') { ... }
     
-    return { message: null, error: "An unexpected error occurred while subscribing. Please try again later.", submittedEmail: rawEmailString };
+    return { message: null, error: "An unexpected error occurred while joining the waitlist. Please try again later.", submittedEmail: rawEmailString };
   }
 }
+
