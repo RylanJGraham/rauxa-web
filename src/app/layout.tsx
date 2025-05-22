@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
@@ -13,6 +14,8 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'Rauxa - Spontaneous Plans, Real Connections',
   description: 'Rauxa helps you meet people and join events instantly. Discover spontaneous plans and make real connections in your city.',
+  // It's also good practice to define icons here for better PWA/manifest integration,
+  // but a direct link in the head is the most straightforward way for a simple favicon.
 };
 
 export default function RootLayout({
@@ -22,6 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/rauxalogo.png" sizes="any" type="image/png" />
+      </head>
       <body className={`${poppins.variable} font-poppins antialiased`}>
         {children}
         <Toaster />
