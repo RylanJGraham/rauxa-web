@@ -33,7 +33,6 @@ export default function RootLayout({
       <body className={`${poppins.variable} font-poppins antialiased`}>
         {children}
         <Toaster />
-        {process.env.NEXT_PUBLIC_GA_TRACKING_ID && <GoogleAnalytics gaTrackingId={process.env.NEXT_PUBLIC_GA_TRACKING_ID} />}
         <VercelAnalytics />
       </body>
     </html>
