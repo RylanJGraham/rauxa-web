@@ -23,7 +23,7 @@ const RauxaDefinitionSection = () => {
             {/* Flag Image (acts as an icon) */}
             <div className="h-auto w-auto flex-shrink-0">
               <Image
-                src="/CatalanFlag.jpg"
+                src="/CatalanFlag.png"
                 alt="Catalan Flag"
                 width={200}
                 height={118}
