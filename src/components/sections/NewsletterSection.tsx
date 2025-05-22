@@ -5,11 +5,11 @@ import { useActionState, useEffect } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { subscribeToNewsletter, type FormState } from '@/app/actions'; // Import FormState
+import { subscribeToNewsletter, type FormState } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, CheckCircle, AlertTriangle } from 'lucide-react';
 
-const initialState: FormState = { // Use the imported FormState type
+const initialState: FormState = {
   message: null,
   error: null,
   submittedEmail: null,
@@ -18,9 +18,9 @@ const initialState: FormState = { // Use the imported FormState type
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button 
-      type="submit" 
-      aria-disabled={pending} 
+    <Button
+      type="submit"
+      aria-disabled={pending}
       disabled={pending}
       className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg text-base px-6 py-3 shadow-md transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95"
     >
@@ -35,9 +35,7 @@ const NewsletterSection = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!state) return;
-
-    if (state.message) {
+    if (state?.message) {
       let toastDescription = state.message;
       if (state.submittedEmail) {
         toastDescription += ` Email: ${state.submittedEmail}.`;
@@ -48,7 +46,7 @@ const NewsletterSection = () => {
         variant: 'default',
         action: <CheckCircle className="text-green-500" />,
       });
-    } else if (state.error) {
+    } else if (state?.error) {
       let toastDescription = state.error;
       if (state.submittedEmail) {
         toastDescription += ` Attempted with: ${state.submittedEmail}.`;
@@ -60,7 +58,7 @@ const NewsletterSection = () => {
         action: <AlertTriangle className="text-yellow-500" />,
       });
     }
-  }, [state, toast]);
+  }, [state]); // Removed toast from dependencies as it should be stable
 
   return (
     <section className="py-16 md:py-24 bg-secondary text-secondary-foreground">
@@ -83,7 +81,9 @@ const NewsletterSection = () => {
             />
             <SubmitButton />
           </div>
-          {/* Form state messages can be displayed here if needed, but toast is primary feedback */}
+          {/* Direct feedback for debugging, if toasts are problematic */}
+          {/* {state?.message && <p className="mt-4 text-green-400">{state.message}</p>} */}
+          {/* {state?.error && <p className="mt-4 text-red-400">{state.error}</p>} */}
         </form>
       </div>
     </section>
