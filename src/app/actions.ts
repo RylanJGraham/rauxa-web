@@ -3,7 +3,7 @@
 
 import { z } from "zod";
 import { db } from '@/lib/firebase'; // Import db from our new firebase config
-import { collection, addDoc, query, where, getDocs, Timestamp } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, Timestamp, FirestoreError } from "firebase/firestore";
 
 const emailSchema = z.string().email({ message: "Please enter a valid email address." });
 
@@ -47,10 +47,19 @@ export async function subscribeToNewsletter(prevState: FormState | undefined, fo
     
     console.error("Waitlist subscription error:", e);
     
-    // Check for specific Firebase error codes if needed, e.g., permission denied
-    // For example: if (e.code === 'permission-denied') { ... }
+    if (e instanceof FirestoreError && e.code === 'permission-denied') {
+      return { 
+        message: null, 
+        error: "Permission denied. Please check your Firestore security rules to ensure reads and writes are allowed for the 'waitlist' collection.", 
+        submittedEmail: rawEmailString 
+      };
+    }
     
-    return { message: null, error: "An unexpected error occurred while joining the waitlist. Please try again later.", submittedEmail: rawEmailString };
+    return { 
+      message: null, 
+      error: "An unexpected error occurred while joining the waitlist. Please try again later.", 
+      submittedEmail: rawEmailString 
+    };
   }
 }
 
