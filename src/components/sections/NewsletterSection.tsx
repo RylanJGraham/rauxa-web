@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -33,10 +33,11 @@ function SubmitButton() {
 const NewsletterSection = () => {
   const [state, formAction] = useActionState(subscribeToNewsletter, initialState);
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null); // Ref for the form
 
   useEffect(() => {
-    // Ensure state is not null before trying to access its properties
-    if (state) {
+    // Ensure state is not null and has a message or error before processing
+    if (state && (state.message || state.error)) {
       if (state.message) {
         let toastDescription = state.message;
         if (state.submittedEmail) {
@@ -48,6 +49,7 @@ const NewsletterSection = () => {
           variant: 'default',
           action: <CheckCircle className="text-green-500" />,
         });
+        formRef.current?.reset(); // Reset the form on success
       } else if (state.error) {
         let toastDescription = state.error;
         if (state.submittedEmail) {
@@ -61,7 +63,7 @@ const NewsletterSection = () => {
         });
       }
     }
-  }, [state]);
+  }, [state, toast]); // N.B. toast function from useToast should be stable
 
   return (
     <section className="py-16 md:py-24 bg-secondary text-secondary-foreground">
@@ -72,7 +74,7 @@ const NewsletterSection = () => {
         <p className="text-lg sm:text-xl mb-10 max-w-xl mx-auto text-secondary-foreground/90">
           Join our community and get exclusive updates, early access, and special launch day surprises.
         </p>
-        <form action={formAction} className="max-w-lg mx-auto">
+        <form ref={formRef} action={formAction} className="max-w-lg mx-auto">
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             <Input
               type="email"
