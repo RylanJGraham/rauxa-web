@@ -74,8 +74,7 @@ const ScreenshotsCarousel = () => {
             {screenshots.map((screenshot) => (
               <CarouselItem key={screenshot.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3">
                 <div className="p-1 h-full">
-                  {/* Apply max-w-xs and mx-auto to the Card for all screen sizes */}
-                  <Card className="overflow-hidden rounded-xl shadow-lg h-full transform transition-transform duration-300 hover:scale-105 aspect-[9/19] max-w-xs mx-auto">
+                  <Card className="overflow-hidden rounded-xl shadow-lg h-full transform transition-transform duration-300 md:hover:scale-105 aspect-[9/19] max-w-[220px] sm:max-w-[260px] md:max-w-xs mx-auto">
                     <CardContent className="p-0 flex items-center justify-center h-full">
                       <div className="relative w-full h-full">
                         <Image
@@ -83,8 +82,7 @@ const ScreenshotsCarousel = () => {
                           alt={screenshot.alt}
                           fill
                           className="object-contain"
-                          /* Adjusted sizes prop for better optimization on smaller screens with max-w-xs card */
-                          sizes="(max-width: 400px) 80vw, 300px"
+                          sizes="(max-width: 639px) 220px, (max-width: 767px) 260px, 320px"
                           data-ai-hint={screenshot.hint}
                         />
                       </div>
@@ -103,4 +101,3 @@ const ScreenshotsCarousel = () => {
 };
 
 export default ScreenshotsCarousel;
-
