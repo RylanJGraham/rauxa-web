@@ -36,6 +36,8 @@ const NewsletterSection = () => {
   const formRef = useRef<HTMLFormElement>(null); // Ref for the form
 
   useEffect(() => {
+    console.log("NewsletterSection useEffect triggered. Current state:", state); // For debugging
+
     // Ensure state is not null and has a message or error before processing
     if (state && (state.message || state.error)) {
       if (state.message) {
@@ -63,7 +65,7 @@ const NewsletterSection = () => {
         });
       }
     }
-  }, [state, toast]); // N.B. toast function from useToast should be stable
+  }, [state]); // Dependency array ensures this runs when 'state' changes
 
   return (
     <section className="py-16 md:py-24 bg-secondary text-secondary-foreground">
