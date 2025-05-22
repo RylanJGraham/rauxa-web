@@ -74,7 +74,7 @@ const ScreenshotsCarousel = () => {
             {screenshots.map((screenshot) => (
               <CarouselItem key={screenshot.id} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3">
                 <div className="p-1 h-full">
-                  <Card className="overflow-hidden rounded-xl shadow-lg h-full transform transition-transform duration-300 md:hover:scale-105 aspect-[9/19] max-w-[220px] sm:max-w-[260px] md:max-w-xs mx-auto">
+                  <Card className="overflow-hidden rounded-xl shadow-lg h-full transform transition-transform duration-300 aspect-[9/19] max-w-[220px] sm:max-w-[260px] md:max-w-xs mx-auto">
                     <CardContent className="p-0 flex items-center justify-center h-full">
                       <div className="relative w-full h-full">
                         <Image
@@ -92,8 +92,8 @@ const ScreenshotsCarousel = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="left-1 sm:left-2 md:-left-12" />
+          <CarouselNext className="right-1 sm:right-2 md:-right-12" />
         </Carousel>
       </div>
     </section>
