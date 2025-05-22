@@ -35,30 +35,33 @@ const NewsletterSection = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (state?.message) {
-      let toastDescription = state.message;
-      if (state.submittedEmail) {
-        toastDescription += ` Email: ${state.submittedEmail}.`;
+    // Ensure state is not null before trying to access its properties
+    if (state) {
+      if (state.message) {
+        let toastDescription = state.message;
+        if (state.submittedEmail) {
+          toastDescription += ` Email: ${state.submittedEmail}.`;
+        }
+        toast({
+          title: "Success!",
+          description: toastDescription,
+          variant: 'default',
+          action: <CheckCircle className="text-green-500" />,
+        });
+      } else if (state.error) {
+        let toastDescription = state.error;
+        if (state.submittedEmail) {
+          toastDescription += ` Attempted with: ${state.submittedEmail}.`;
+        }
+        toast({
+          title: "Oops!",
+          description: toastDescription,
+          variant: 'destructive',
+          action: <AlertTriangle className="text-yellow-500" />,
+        });
       }
-      toast({
-        title: "Success!",
-        description: toastDescription,
-        variant: 'default',
-        action: <CheckCircle className="text-green-500" />,
-      });
-    } else if (state?.error) {
-      let toastDescription = state.error;
-      if (state.submittedEmail) {
-        toastDescription += ` Attempted with: ${state.submittedEmail}.`;
-      }
-      toast({
-        title: "Oops!",
-        description: toastDescription,
-        variant: 'destructive',
-        action: <AlertTriangle className="text-yellow-500" />,
-      });
     }
-  }, [state]); // Removed toast from dependencies as it should be stable
+  }, [state]);
 
   return (
     <section className="py-16 md:py-24 bg-secondary text-secondary-foreground">
@@ -81,9 +84,6 @@ const NewsletterSection = () => {
             />
             <SubmitButton />
           </div>
-          {/* Direct feedback for debugging, if toasts are problematic */}
-          {/* {state?.message && <p className="mt-4 text-green-400">{state.message}</p>} */}
-          {/* {state?.error && <p className="mt-4 text-red-400">{state.error}</p>} */}
         </form>
       </div>
     </section>
