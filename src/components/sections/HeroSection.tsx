@@ -23,7 +23,7 @@ const HeroSection = () => {
           Spontaneous Plans, <br className="sm:hidden"/>Real Connections
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl text-primary-foreground/90 mb-10 max-w-2xl mx-auto">
-          Rauxa helps you meet people and join events <br /> <strong className="font-bold">instantly</strong>
+          Rauxa helps you meet people and join events instantly
         </p>
         <Link href="/updates" passHref>
           <Button 

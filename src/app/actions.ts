@@ -2,64 +2,127 @@
 "use server";
 
 import { z } from "zod";
-import { db } from '@/lib/firebase'; // Import db from our new firebase config
-import { collection, addDoc, query, where, getDocs, Timestamp, FirestoreError } from "firebase/firestore";
+import { db } from '@/lib/firebase';
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  Timestamp,
+  FirestoreError
+} from "firebase/firestore";
 
 const emailSchema = z.string().email({ message: "Please enter a valid email address." });
 
-// Export FormState so it can be used by the client component
 export interface FormState {
   message: string | null;
   error: string | null;
-  submittedEmail?: string | null; // To hold the email that was processed
+  submittedEmail?: string | null;
 }
 
-export async function subscribeToNewsletter(prevState: FormState | undefined, formData: FormData): Promise<FormState> {
+export async function subscribeToNewsletter(
+  prevState: FormState | undefined,
+  formData: FormData
+): Promise<FormState> {
   const email = formData.get("email");
   const rawEmailString = email?.toString();
 
   try {
     const validatedEmail = emailSchema.parse(email);
-    console.log("Attempting to add email to waitlist in Firestore:", validatedEmail);
 
     const waitlistRef = collection(db, "waitlist");
-    
-    // Check if email already exists
     const q = query(waitlistRef, where("email", "==", validatedEmail));
     const querySnapshot = await getDocs(q);
 
     if (!querySnapshot.empty) {
-      return { message: null, error: "This email is already on the waitlist.", submittedEmail: validatedEmail };
+      return {
+        message: null,
+        error: "This email is already on the waitlist.",
+        submittedEmail: validatedEmail
+      };
     }
 
-    // Add a new document with a generated id.
+    // Add to Firestore
     await addDoc(waitlistRef, {
       email: validatedEmail,
-      createdAt: Timestamp.now(), // Use Firestore Timestamp for consistency
+      createdAt: Timestamp.now()
     });
-    console.log("Successfully added email to waitlist in Firestore:", validatedEmail);
-    return { message: "Thank you for joining the waitlist! We'll keep you posted.", error: null, submittedEmail: validatedEmail };
+
+    // Add to Brevo
+    if (!process.env.BREVO_API_KEY) {
+      console.error("BREVO_API_KEY is not set. Skipping Brevo contact creation.");
+      return {
+        message: "Subscribed to waitlist (Firestore only - Brevo integration skipped due to missing API key).",
+        error: null,
+        submittedEmail: validatedEmail
+      };
+    }
+
+    const brevoPayload = {
+      email: validatedEmail,
+      listIds: [6], // Rauxa Beta Signup list ID
+      updateEnabled: true,
+      // You can add attributes here if needed, e.g.,
+      // attributes: { SIGNEDUP_AT: new Date().toISOString() }
+    };
+
+    const brevoResponse = await fetch("https://api.brevo.com/v3/contacts", {
+      method: "POST",
+      headers: {
+        "api-key": process.env.BREVO_API_KEY,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(brevoPayload)
+    });
+
+    if (!brevoResponse.ok) {
+      const errorBody = await brevoResponse.text();
+      console.error(`Brevo API Error (${brevoResponse.status}):`, errorBody);
+      return {
+        message: null,
+        error: `Subscribed to waitlist, but failed to add to mailing list (Brevo). Status: ${brevoResponse.statusText}`,
+        submittedEmail: validatedEmail,
+      };
+    }
+
+    return {
+      message: "You're subscribed! We'll keep you posted.",
+      error: null,
+      submittedEmail: validatedEmail
+    };
 
   } catch (e) {
     if (e instanceof z.ZodError) {
-      return { message: null, error: e.errors[0].message, submittedEmail: rawEmailString };
+      return {
+        message: null,
+        error: e.errors[0].message,
+        submittedEmail: rawEmailString
+      };
     }
-    
-    console.error("Waitlist subscription error:", e);
-    
-    if (e instanceof FirestoreError && e.code === 'permission-denied') {
-      return { 
-        message: null, 
-        error: "Permission denied. Please check your Firestore security rules to ensure reads and writes are allowed for the 'waitlist' collection.", 
-        submittedEmail: rawEmailString 
+
+    if (e instanceof FirestoreError) {
+      console.error("Firestore Error:", e.code, e.message);
+      if (e.code === 'permission-denied') {
+        return {
+          message: null,
+          error: "Error subscribing: Permission denied. Please check server logs or Firestore rules.",
+          submittedEmail: rawEmailString
+        };
+      }
+      return {
+        message: null,
+        error: `Error subscribing: A database error occurred (${e.code}).`,
+        submittedEmail: rawEmailString
       };
     }
     
-    return { 
-      message: null, 
-      error: "An unexpected error occurred while joining the waitlist. Please try again later.", 
-      submittedEmail: rawEmailString 
+    console.error("Waitlist subscription error:", e);
+    return {
+      message: null,
+      error: "Oops! An unexpected error occurred while joining the waitlist. Please try again.",
+      submittedEmail: rawEmailString
     };
   }
 }
-
