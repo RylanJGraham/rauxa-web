@@ -38,7 +38,7 @@ export async function subscribeToNewsletter(
     if (!querySnapshot.empty) {
       return {
         message: null,
-        error: "This email is already on the waitlist.",
+        error: "This email is already on the waitlist. No further action has been taken.",
         submittedEmail: validatedEmail
       };
     }
@@ -54,10 +54,9 @@ export async function subscribeToNewsletter(
 
     if (!brevoApiKey) {
       console.error("BREVO_API_KEY is not set in the environment. Skipping Brevo contact creation.");
-      // Still return a success for Firestore, but warn about Brevo.
       return {
         message: "Subscribed to waitlist (Firestore only - Brevo integration skipped: API key missing).",
-        error: null, // Not an error for the user, but an operational warning.
+        error: null, 
         submittedEmail: validatedEmail
       };
     }
@@ -80,10 +79,14 @@ export async function subscribeToNewsletter(
 
     if (!brevoResponse.ok) {
       const errorBody = await brevoResponse.text();
+      let errorMessage = `Subscribed to waitlist, but failed to add to mailing list (Brevo). Status: ${brevoResponse.statusText}.`;
+      if (brevoResponse.status === 401) {
+        errorMessage += " Please check your Brevo API key and permissions.";
+      }
       console.error(`Brevo API Error (${brevoResponse.status} ${brevoResponse.statusText}):`, errorBody);
       return {
         message: null,
-        error: `Subscribed to waitlist, but failed to add to mailing list (Brevo). Status: ${brevoResponse.statusText}. Please check your Brevo API key and permissions.`,
+        error: errorMessage,
         submittedEmail: validatedEmail,
       };
     }
@@ -105,16 +108,13 @@ export async function subscribeToNewsletter(
 
     if (e instanceof FirestoreError) {
       console.error("Firestore Error:", e.code, e.message);
+      let userErrorMessage = `Error subscribing: A database error occurred (${e.code}).`;
       if (e.code === 'permission-denied') {
-        return {
-          message: null,
-          error: "Error subscribing: Permission denied. Please check server logs or Firestore rules.",
-          submittedEmail: rawEmailString
-        };
+        userErrorMessage = "Error subscribing: Permission denied. Please check server logs or Firestore rules.";
       }
       return {
         message: null,
-        error: `Error subscribing: A database error occurred (${e.code}).`,
+        error: userErrorMessage,
         submittedEmail: rawEmailString
       };
     }
