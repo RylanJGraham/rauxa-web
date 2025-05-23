@@ -50,11 +50,14 @@ export async function subscribeToNewsletter(
     });
 
     // Add to Brevo
-    if (!process.env.BREVO_API_KEY) {
-      console.error("BREVO_API_KEY is not set. Skipping Brevo contact creation.");
+    const brevoApiKey = process.env.BREVO_API_KEY;
+
+    if (!brevoApiKey) {
+      console.error("BREVO_API_KEY is not set in the environment. Skipping Brevo contact creation.");
+      // Still return a success for Firestore, but warn about Brevo.
       return {
-        message: "Subscribed to waitlist (Firestore only - Brevo integration skipped due to missing API key).",
-        error: null,
+        message: "Subscribed to waitlist (Firestore only - Brevo integration skipped: API key missing).",
+        error: null, // Not an error for the user, but an operational warning.
         submittedEmail: validatedEmail
       };
     }
@@ -63,14 +66,12 @@ export async function subscribeToNewsletter(
       email: validatedEmail,
       listIds: [6], // Rauxa Beta Signup list ID
       updateEnabled: true,
-      // You can add attributes here if needed, e.g.,
-      // attributes: { SIGNEDUP_AT: new Date().toISOString() }
     };
 
     const brevoResponse = await fetch("https://api.brevo.com/v3/contacts", {
       method: "POST",
       headers: {
-        "api-key": process.env.BREVO_API_KEY,
+        "api-key": brevoApiKey,
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
@@ -79,10 +80,10 @@ export async function subscribeToNewsletter(
 
     if (!brevoResponse.ok) {
       const errorBody = await brevoResponse.text();
-      console.error(`Brevo API Error (${brevoResponse.status}):`, errorBody);
+      console.error(`Brevo API Error (${brevoResponse.status} ${brevoResponse.statusText}):`, errorBody);
       return {
         message: null,
-        error: `Subscribed to waitlist, but failed to add to mailing list (Brevo). Status: ${brevoResponse.statusText}`,
+        error: `Subscribed to waitlist, but failed to add to mailing list (Brevo). Status: ${brevoResponse.statusText}. Please check your Brevo API key and permissions.`,
         submittedEmail: validatedEmail,
       };
     }
@@ -118,7 +119,7 @@ export async function subscribeToNewsletter(
       };
     }
     
-    console.error("Waitlist subscription error:", e);
+    console.error("Waitlist subscription error (unexpected):", e);
     return {
       message: null,
       error: "Oops! An unexpected error occurred while joining the waitlist. Please try again.",
