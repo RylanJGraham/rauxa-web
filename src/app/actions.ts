@@ -51,6 +51,7 @@ export async function subscribeToNewsletter(
 
     // Add to Brevo
     const brevoApiKey = process.env.BREVO_API_KEY;
+    console.log("Server BREVO_API_KEY:", process.env.BREVO_API_KEY);
 
     if (!brevoApiKey) {
       console.error("BREVO_API_KEY is not set in the server environment. Skipping Brevo contact creation. Ensure this environment variable is configured in your hosting environment (e.g., Cloud Function settings or via deployment process).");
