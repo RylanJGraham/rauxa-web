@@ -53,9 +53,9 @@ export async function subscribeToNewsletter(
     const brevoApiKey = process.env.BREVO_API_KEY;
 
     if (!brevoApiKey) {
-      console.error("BREVO_API_KEY is not set in the environment. Skipping Brevo contact creation.");
+      console.error("BREVO_API_KEY is not set in the server environment. Skipping Brevo contact creation. Ensure this environment variable is configured in your hosting environment (e.g., Cloud Function settings or via deployment process).");
       return {
-        message: "Subscribed to waitlist (Firestore only - Brevo integration skipped: API key missing).",
+        message: "Subscribed to waitlist (Firestore only - Brevo integration skipped: API key missing on server).",
         error: null, 
         submittedEmail: validatedEmail
       };
@@ -81,7 +81,7 @@ export async function subscribeToNewsletter(
       const errorBody = await brevoResponse.text();
       let errorMessage = `Subscribed to waitlist, but failed to add to mailing list (Brevo). Status: ${brevoResponse.statusText}.`;
       if (brevoResponse.status === 401) {
-        errorMessage += " Please check your Brevo API key and permissions.";
+        errorMessage += " Please check your Brevo API key value and permissions in your hosting environment.";
       }
       console.error(`Brevo API Error (${brevoResponse.status} ${brevoResponse.statusText}):`, errorBody);
       return {
