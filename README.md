@@ -1,8 +1,5 @@
 # Rauxa Official Website 🌐
 
-![Rauxa Website Screenshot](assets/website_homepage.png)
-*(Optional: Replace with an actual screenshot of your Rauxa website's homepage)*
-
 Welcome to the official repository for the **Rauxa Website**! This project serves as the public face and central information hub for the Rauxa mobile application. It's designed to introduce users to Rauxa's unique value proposition, showcase its features, provide links for app downloads, and offer general information about the project.
 
 ---
